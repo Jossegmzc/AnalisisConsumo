@@ -113,5 +113,9 @@ public class Consumidor {
 		
 	}
 	
+	 public int countConsumidor() { 
+         return 1; 
+	 }
+	
 
 }
