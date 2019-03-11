@@ -10,6 +10,6 @@
     <string>run</string>
     <string>random_seed</string>
   </sourceIds>
-  <fileName>Microdata.csv</fileName>
+  <fileName>database/microdata.csv</fileName>
   <addTimeStamp>true</addTimeStamp>
 </repast.simphony.data2.engine.FileSinkDescriptor>
