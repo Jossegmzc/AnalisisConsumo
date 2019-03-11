@@ -1,5 +1,7 @@
 package analisisConsumo;
 
+import repast.simphony.engine.schedule.ScheduledMethod;
+
 public class Consumidor {
 	//double pphog; //integrantes en el hogar.
 	double gca; //cantidad total designada al consumo
@@ -50,9 +52,8 @@ public class Consumidor {
 	int enfoque = 1;//esto será un parámetro o una variable contadora que haga que se optimice según todos los enfoques
 	//methods
 
-	
-	
 	/**Método mediante los consumidores deciden su proporción de consumo*/
+	 @ScheduledMethod(start=1,interval=1,shuffle=true,priority=90)
 	public void consumo() {
 		switch (enfoque) {
 		/**Caso Funcion de utilidad, Cobb Douglas, 1928*/
@@ -116,6 +117,18 @@ public class Consumidor {
 	 public int countConsumidor() { 
          return 1; 
 	 }
+	 
+	 public double getClase1() { return this.clase1; }
+	 public double getClase2() { return this.clase2; }
+	 public double getClase3() { return this.clase3; }
+	 public double getClase4() { return this.clase4; }
+	 public double getClase5() { return this.clase5; }
+	 public double getClase6() { return this.clase6; }
+	 public double getClase7() { return this.clase7; }
+	 public double getClase8() { return this.clase8; }
+	 public double getClase9() { return this.clase9; }
+	 public double getClase10() { return this.clase10; }
+	 
 	
 
 }

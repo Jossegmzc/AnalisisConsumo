@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Scenario>
+<Scenario simphonyVersion="2.5.0">
+<repast.simphony.action.data_set context="AnalisisConsumo" file="repast.simphony.action.data_set_0.xml" />
+<repast.simphony.action.file_sink context="AnalisisConsumo" file="repast.simphony.action.file_sink_1.xml" />
+<repast.simphony.dataLoader.engine.ClassNameDataLoaderAction context="AnalisisConsumo" file="repast.simphony.dataLoader.engine.ClassNameDataLoaderAction_2.xml" />
 </Scenario>

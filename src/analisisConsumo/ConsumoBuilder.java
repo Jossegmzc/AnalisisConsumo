@@ -18,6 +18,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
         Parameters params = RunEnvironment.getInstance().getParameters();
         
         HashMap<Integer,Double> datos= getHM();
+        System.out.printf("The size of the hashmap is %s\n",datos.size());
         
         for (HashMap.Entry<Integer, Double> entry : datos.entrySet()) {
         	System.out.printf("key: %s, value: %s", entry.getKey(), entry.getValue());
@@ -25,6 +26,8 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
         	context.add(new Consumidor(entry.getKey(),entry.getValue()));
         	
         }
+        
+        System.out.printf("Finished context of size %s\n", context.size());
                 
         return context;  
     }
@@ -50,7 +53,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
              	 int pos = Integer.parseInt(parts[0]); // 123 Integer.parseInt(parts[0])
              	 double gca = Double.parseDouble(parts[1]); // 654321 double value = Double.parseDouble(parts);
              	 System.out.printf("%s, %s \n", pos, gca);
-             	             	
+             	  datos.put(pos, gca);          	
              	 //System.out.println(pos);
              	 //System.out.println(gca);
              	     	 

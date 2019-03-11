@@ -1,0 +1,15 @@
+<repast.simphony.data2.engine.FileSinkDescriptor simphonyVersion="2.5.0">
+  <name>Microdata</name>
+  <dataSet>Microdata</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>Clase1</string>
+    <string>Clase2</string>
+    <string>tick</string>
+    <string>run</string>
+    <string>random_seed</string>
+  </sourceIds>
+  <fileName>Microdata.csv</fileName>
+  <addTimeStamp>true</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>
