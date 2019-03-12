@@ -1,6 +1,8 @@
 package analisisConsumo;
 
+import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
+import repast.simphony.parameter.Parameters;
 
 public class Consumidor {
 	//double pphog; //integrantes en el hogar.
@@ -49,7 +51,9 @@ public class Consumidor {
 		
 		
 	}
-	int enfoque = 1;//esto será un parámetro o una variable contadora que haga que se optimice según todos los enfoques
+	
+	 Parameters params = RunEnvironment.getInstance().getParameters();
+	int enfoque = params.getInteger("enfoque");;//esto será un parámetro o una variable contadora que haga que se optimice según todos los enfoques
 	//methods
 
 	/**Método mediante los consumidores deciden su proporción de consumo*/
@@ -72,13 +76,21 @@ public class Consumidor {
 			
 		/**Jerarquía de necesidades, Maslow,1943*/
 		case 2 : clase1 = 962.5 + gca*0.2124; 
-			if(gca-clase1 > 0) { clase3= gca*0.3389; clase5 = gca*0.1408 ;clase6 = gca*0.0438 ;clase8 = gca*0.0713; 
-				if(gca-clase1-clase3-clase5-clase6-clase8 > 0) {clase2 =gca*0.0613; clase10 = gca*0.0455;
-					if (gca - clase1 - clase3 - clase5- clase2-clase6-clase8-clase10 > 0 ){ 
-					clase4 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.0442; clase7 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.0889 ; clase10 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.0396;
-					}
+			if(gca-clase1 > 0) { 
+				clase3= (gca-clase1)*0.3389;
+				clase5 = (gca-clase1)*0.1408 ;
+				clase6 = (gca-clase1)*0.0438 ;
+				clase8 = (gca-clase1)*0.0713; 
+					if(gca-clase1-clase3-clase5-clase6-clase8 > 0) {
+						clase2 =(gca-clase1-clase3-clase5-clase6-clase8)*0.1215; 
+						clase10 = (gca-clase1-clase3-clase5-clase6-clase8)*0.0903;
+							if (gca - clase1 - clase3 - clase5- clase2-clase6-clase8-clase10 > 0 ){ 
+								clase4 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.2557; 
+								clase7 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.5148; 
+								clase9=(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10- clase4 - clase10); 
+							}
 					
-				}
+					}	
 			
 			
 			}  ;   break;
@@ -118,6 +130,10 @@ public class Consumidor {
          return 1; 
 	 }
 	 
+	 
+	 public int getEnfoque() { return this.enfoque;	 }
+	 public int getPos() { return this.pos;	 }
+	 public double getTotal() { return this.gca; }	 
 	 public double getClase1() { return this.clase1; }
 	 public double getClase2() { return this.clase2; }
 	 public double getClase3() { return this.clase3; }

@@ -52,7 +52,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
              	 String[] parts = data.split(",");
              	 int pos = Integer.parseInt(parts[0]); // 123 Integer.parseInt(parts[0])
              	 double gca = Double.parseDouble(parts[1]); // 654321 double value = Double.parseDouble(parts);
-             	 System.out.printf("%s, %s \n", pos, gca);
+             	// System.out.printf("%s, %s \n", pos, gca);
              	  datos.put(pos, gca);          	
              	 //System.out.println(pos);
              	 //System.out.println(gca);

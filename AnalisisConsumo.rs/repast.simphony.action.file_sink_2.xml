@@ -7,8 +7,17 @@
     <string>Clase1</string>
     <string>Clase2</string>
     <string>tick</string>
-    <string>run</string>
-    <string>random_seed</string>
+    <string>Pos</string>
+    <string>Clase3</string>
+    <string>Clase4</string>
+    <string>Clase5</string>
+    <string>Clase6</string>
+    <string>Clase7</string>
+    <string>Clase8</string>
+    <string>Clase9</string>
+    <string>Clase10</string>
+    <string>Total</string>
+    <string>countConsumidor</string>
   </sourceIds>
   <fileName>database/microdata.csv</fileName>
   <addTimeStamp>true</addTimeStamp>
