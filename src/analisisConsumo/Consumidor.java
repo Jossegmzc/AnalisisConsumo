@@ -71,15 +71,15 @@ public class Consumidor {
 			clase7 = gca*0.0692; 
 			clase8 = gca*0.043; 
 			clase9 = gca*0.031; 
-			clase10 = gca*0.0585 ; break;	
+			clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4-clase2-clase7-clase9) ; break;	
 			
 			
 		/**Jerarquía de necesidades, Maslow,1943*/
-		case 2 : clase1 = 962.5 + gca*0.2124; 
+		case 2 : clase1 = 962.5 + (gca-962.5)*0.2124; 
 			if(gca-clase1 > 0) { 
 				clase3= (gca-clase1)*0.3389;
-				clase5 = (gca-clase1)*0.1408 ;
-				clase6 = (gca-clase1)*0.0438 ;
+				clase5 = (gca-clase1)*0.1408;
+				clase6 = (gca-clase1)*0.0438;
 				clase8 = (gca-clase1)*0.0713; 
 					if(gca-clase1-clase3-clase5-clase6-clase8 > 0) {
 						clase2 =(gca-clase1-clase3-clase5-clase6-clase8)*0.1215; 
@@ -87,7 +87,7 @@ public class Consumidor {
 							if (gca - clase1 - clase3 - clase5- clase2-clase6-clase8-clase10 > 0 ){ 
 								clase4 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.2557; 
 								clase7 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.5148; 
-								clase9=(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10- clase4 - clase10); 
+								clase9=(gca - clase1 - clase2 - clase3- clase4 - clase5 - clase6 - clase7- clase8 - clase10); 
 							}
 					
 					}	
@@ -95,14 +95,18 @@ public class Consumidor {
 			
 			}  ;   break;
 			/**Enfoque de prioridades, Chávez-Juárez 2018*/
-		case 3 : clase1 = 555.41 + gca*0.3703; clase3 = 303.92 + gca*0.2035; clase6 = 39.27 + gca*0.0261; clase8 = 63.90 + gca*0.043; //consumo minimo vital
-			if(gca-clase1 - clase3 - clase6 - clase8 > 0) {clase5 = (gca-clase1 - clase3 - clase6 - clase8)*0.2385; //consumo Salud
+		case 3 : clase1 = 555.41 + (gca-962.5)*0.3703; 
+		clase3 = 303.92 + (gca-962.5)*0.2035; 
+		clase6 = 39.27 + (gca-962.5)*0.0261; 
+		clase8 = 63.90 + (gca-962.5)*0.043; //consumo minimo vital
+			if(gca-clase1 - clase3 - clase6 - clase8 > 0) {
+				clase5 = (gca-clase1 - clase3 - clase6 - clase8)*0.2385; //consumo Salud
 				if (gca-clase1 - clase3 - clase6 - clase8 - clase5 > 0) {clase4 = (gca-clase1 - clase3 - clase6 - clase8 - clase5)*0.1267; //consumo Educación
 					if(gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4 > 0) {  //consumo adicional
 						clase2 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.3314;
 						clase7 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.2922;
 						clase9 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.1302;
-						clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.2462;	
+						clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4-clase2-clase7-clase9);	
 						
 					}
 					

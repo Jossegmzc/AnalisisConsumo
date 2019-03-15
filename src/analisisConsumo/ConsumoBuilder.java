@@ -33,7 +33,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
     }
 	
 	 public  HashMap<Integer,Double> getHM(){
- 		String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/bola.csv";
+ 		String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/bola100.csv";
          // -File class needed to turn stringName to actual file
          File file = new File(fileNameDefined);
          HashMap<Integer,Double> datos = new HashMap<Integer,Double>();

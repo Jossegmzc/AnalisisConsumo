@@ -14,7 +14,7 @@
     <frequency>REPEAT</frequency>
     <hashCode>-1226208152</hashCode>
   </scheduleParams>
-  <atEnd>true</atEnd>
+  <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
       <string>Pos</string>
@@ -113,11 +113,11 @@
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>countConsumidor</string>
+      <string>Enfoque</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>countConsumidor</id>
+        <id>Enfoque</id>
         <className>analisisConsumo.Consumidor</className>
-        <methodName>countConsumidor</methodName>
+        <methodName>getEnfoque</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>
