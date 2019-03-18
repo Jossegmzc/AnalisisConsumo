@@ -75,7 +75,10 @@ public class Consumidor {
 			
 			
 		/**Jerarquía de necesidades, Maslow,1943*/
-		case 2 : clase1 = 962.5 + (gca-962.5)*0.2124; 
+		case 2 : if (gca > 962.5){
+			
+		
+			clase1 = 962.5 + (gca-962.5)*0.2124; 
 			if(gca-clase1 > 0) { 
 				clase3= (gca-clase1)*0.3389;
 				clase5 = (gca-clase1)*0.1408;
@@ -93,9 +96,15 @@ public class Consumidor {
 					}	
 			
 			
-			}  ;   break;
+			}
+		}
+		else {
+			clase1=gca;
+		};   break;
 			/**Enfoque de prioridades, Chávez-Juárez 2018*/
-		case 3 : clase1 = 555.41 + (gca-962.5)*0.3703; 
+		case 3 : 
+		if (gca>962.5) {
+			clase1 = 555.41 + (gca-962.5)*0.3703; 
 		clase3 = 303.92 + (gca-962.5)*0.2035; 
 		clase6 = 39.27 + (gca-962.5)*0.0261; 
 		clase8 = 63.90 + (gca-962.5)*0.043; //consumo minimo vital
@@ -112,7 +121,15 @@ public class Consumidor {
 					
 				}
 			
-			}; break;
+			}
+		}
+		else { clase1 = gca*0.5760;
+		clase3 = gca*0.3165;
+		clase6=gca*0.0406; 
+		clase8=gca*0.0669;
+
+			
+		}; break;
 		
 		/**Valores de consumo, Sheth et al (1991)  */
 		case 4 :  

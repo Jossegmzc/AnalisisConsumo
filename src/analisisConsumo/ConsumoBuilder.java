@@ -21,7 +21,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
         System.out.printf("The size of the hashmap is %s\n",datos.size());
         
         for (HashMap.Entry<Integer, Double> entry : datos.entrySet()) {
-        	System.out.printf("key: %s, value: %s", entry.getKey(), entry.getValue());
+        //	System.out.printf("key: %s, value: %s", entry.getKey(), entry.getValue());
         	//crear consumidores
         	context.add(new Consumidor(entry.getKey(),entry.getValue()));
         	
@@ -33,7 +33,8 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
     }
 	
 	 public  HashMap<Integer,Double> getHM(){
- 		String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/bola100.csv";
+ 		//String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/bola100.csv";
+		 String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/basepercapitatotal.csv";
          // -File class needed to turn stringName to actual file
          File file = new File(fileNameDefined);
          HashMap<Integer,Double> datos = new HashMap<Integer,Double>();
