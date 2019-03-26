@@ -53,7 +53,9 @@ public class Consumidor {
 	}
 	
 	 Parameters params = RunEnvironment.getInstance().getParameters();
-	int enfoque = params.getInteger("enfoque");;//esto será un parámetro o una variable contadora que haga que se optimice según todos los enfoques
+	int enfoque = params.getInteger("enfoque");//esto será un parámetro o una variable contadora que haga que se optimice según todos los enfoques
+	double lbm = params.getDouble("bienmin");
+	//double lbm = 5000; 
 	//methods
 
 	/**Método mediante los consumidores deciden su proporción de consumo*/
@@ -75,10 +77,10 @@ public class Consumidor {
 			
 			
 		/**Jerarquía de necesidades, Maslow,1943*/
-		case 2 : if (gca > 962.5){
+		case 2 : if (gca > lbm){
 			
 		
-			clase1 = 962.5 + (gca-962.5)*0.2124; 
+			clase1 = lbm + (gca-lbm)*0.2124; 
 			if(gca-clase1 > 0) { 
 				clase3= (gca-clase1)*0.3389;
 				clase5 = (gca-clase1)*0.1408;
@@ -103,46 +105,68 @@ public class Consumidor {
 		};   break;
 			/**Enfoque de prioridades, Chávez-Juárez 2018*/
 		case 3 : 
-		if (gca>962.5) {
-			clase1 = 555.41 + (gca-962.5)*0.3703; 
-		clase3 = 303.92 + (gca-962.5)*0.2035; 
-		clase6 = 39.27 + (gca-962.5)*0.0261; 
-		clase8 = 63.90 + (gca-962.5)*0.043; //consumo minimo vital
-			if(gca-clase1 - clase3 - clase6 - clase8 > 0) {
-				clase5 = (gca-clase1 - clase3 - clase6 - clase8)*0.2385; //consumo Salud
-				if (gca-clase1 - clase3 - clase6 - clase8 - clase5 > 0) {clase4 = (gca-clase1 - clase3 - clase6 - clase8 - clase5)*0.1267; //consumo Educación
-					if(gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4 > 0) {  //consumo adicional
-						clase2 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.3314;
-						clase7 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.2922;
-						clase9 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.1302;
-						clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4-clase2-clase7-clase9);	
+		if (gca>lbm) {
+			clase1 = lbm*0.5299 + (gca-lbm)*.3503; //Alimentos en el hogar
+			clase3 = lbm*0.2035 + (gca-lbm)*0.2035;  //hogar y vestido
+			clase6 = lbm*0.0515 + (gca-lbm)*0.0261; // seguridad
+			clase8 = lbm*0.0711 + (gca-lbm)*0.043; //transporte público. Consumo minimo vital
+				if(gca-clase1 - clase3 - clase6 - clase8 > 0) {
+					clase5 = (gca-clase1 - clase3 - clase6 - clase8)*0.2985; //consumo Salud (anterior .2585)
+					if (gca-clase1 - clase3 - clase6 - clase8 - clase5 > 0) {
+						clase4 = (gca-clase1 - clase3 - clase6 - clase8 - clase5)*0.1696; //consumo Educación
+						if(gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4 > 0) {  //consumo adicional
+							clase2 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.3334;  
+							clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.2076;
+							clase9 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4)*0.1308;
+							clase7 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4-clase2-clase10-clase9);	
 						
-					}
+						}
 					
-				}
+					}
 			
-			}
+				}
 		}
-		else { clase1 = gca*0.5760;
-		clase3 = gca*0.3165;
-		clase6=gca*0.0406; 
-		clase8=gca*0.0669;
+		else { clase1 = gca*0.5299;
+		clase3 = gca*0.2235;
+		clase6=gca*0.0249; 
+		clase8=gca*0.0511;
+		clase5 = (gca-clase1-clase3-clase6-clase8)*(0.4681);
+		clase9 = (gca-clase1-clase3-clase6-clase8)*(0.1053);
+		clase2 = (gca-clase1-clase3-clase6-clase8)*0.1111;
+		clase4 = (gca-clase1-clase3-clase6-clase8)*0.14;
+		clase10 = gca-clase1-clase2-clase3-clase4-clase5-clase6-clase8-clase9 ; //.1755
 
 			
 		}; break;
 		
 		/**Valores de consumo, Sheth et al (1991)  */
 		case 4 :  
-			clase1 = gca*0.1306;
-			clase2 = gca*0.1162; 
-			clase3 = gca*0.1082; 
-			clase4 = gca*0.1120; 
-			clase5 = gca*0.0745; 
-			clase6 = gca*0.0612; 
-			clase7 = gca*0.1050; 
-			clase8 = gca*0.0717; 
-			clase9 = gca*0.1051; 
-			clase10 = gca - clase1- clase2 - clase3 - clase4 - clase5 - clase6 - clase7 - clase8 - clase9 ; break;//
+			
+			if (gca > lbm) { //valor funcional mas valor social
+			clase1 = gca*0.5299 -pos*gca*.00000747*0.5299; 			
+			clase2 = gca*0.74*0.0792 + gca*pos*0.00001697*0.1192 ; 
+			clase3 = gca*0.66*0.2035 + gca*0.1423*0.2035; 
+			clase4 = gca*0.0344*0.5 + gca*pos*0.000008347*0.0344; 
+			clase5 = gca*0.0847*0.61+ gca*0.0847*0.0385; 
+			clase6 = gca*0.0261*(0.63); 
+			
+			clase8 = gca*0.043*(0.69 + 0.0346); 
+			clase9 = gca*0.031*(0.68+0.70);
+			clase10 = gca*0.038 + gca*pos*0.000008347*0.0581 ;
+			clase7 = gca - clase10- clase2 - clase3 - clase4 - clase5 - clase6 - clase1 - clase8 - clase9 ; break;//
+			}
+			else { //valor funcional
+				clase1 = gca*0.5299  ;
+				clase2= gca*0.74*0.0793;
+				clase3 = gca*0.2035; 
+				clase4 = gca*0.5*0.0344; 
+				clase5 = gca*0.61*0.0847; 
+				clase6 = gca*0.63*0.0261; 
+				clase7 = gca*0.69*0.0692; 
+				clase8 = gca*0.69*0.043; 
+				clase9 = gca*0.68*0.031; 
+				clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4-clase2-clase7-clase9) ; break;
+			}
 		}
 		
 	}

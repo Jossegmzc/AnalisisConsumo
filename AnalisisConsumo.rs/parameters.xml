@@ -12,6 +12,12 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
+				<parameter name="bienmin" displayName="BienestarMin" type="double" 
+						defaultValue="6567" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
 		</parameters>
 
 
