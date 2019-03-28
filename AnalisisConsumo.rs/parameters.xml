@@ -13,7 +13,7 @@
 									
 		/>
 				<parameter name="bienmin" displayName="BienestarMin" type="double" 
-						defaultValue="6567" 
+						defaultValue="11550" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
@@ -25,7 +25,7 @@
 									
 		/>
 		<parameter name="nivel" displayName="Nivel" type="int" 
-						defaultValue="50" 
+						defaultValue="1" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									

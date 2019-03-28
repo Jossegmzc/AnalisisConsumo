@@ -86,18 +86,20 @@ public class Consumidor {
 	/**Método mediante los consumidores deciden su proporción de consumo*/
 	 @ScheduledMethod(start=1,interval=1,shuffle=true,priority=90)
 	public void consumo() {
-		switch (enfoque) {
+	switch (enfoque) {
+	
 		/**Caso Funcion de utilidad, Cobb Douglas, 1928*/
 		case 1 : 
-			clase1 = gca*0.3703; 
-			clase2 = gca*0.0793; 
-			clase3 = gca*0.2035; 
-			clase4 = gca*0.0344; 
-			clase5 = gca*0.0847; 
-			clase6 = gca*0.0261; 
-			clase7 = gca*0.0692; 
-			clase8 = gca*0.043; 
-			clase9 = gca*0.031; 
+			
+			clase1 = gca*0.3739; 
+			clase2 = gca*0.0781; 
+			clase3 = gca*0.2037; 
+			clase4 = gca*0.0341; 
+			clase5 = gca*0.0846; 
+			clase6 = gca*0.0260; 
+			clase7 = gca*0.0681; 
+			clase8 = gca*0.0431; 
+			clase9 = gca*0.0309; 
 			clase10 = (gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4-clase2-clase7-clase9) ; break;	
 			
 			
@@ -113,11 +115,11 @@ public class Consumidor {
 				clase8 = integrantes*(gca-clase1)*0.0713; 
 					if(gca-clase1-clase3-clase5-clase6-clase8 > 0) {
 						clase2 =integrantes*(gca-clase1-clase3-clase5-clase6-clase8)*0.1215; 
-						clase10 = integrantes*(gca-clase1-clase3-clase5-clase6-clase8)*0.0903;
+						clase10 = integrantes*(gca-clase1-clase3-clase5-clase6-clase8)*0.1503;
 							if (gca - clase1 - clase3 - clase5- clase2-clase6-clase8-clase10 > 0 ){ 
-								clase4 = integrantes*(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.2557; 
+								clase4 = integrantes*(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.2057; 
 								clase7 = integrantes*(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.5148; 
-								clase9=integrantes*(gca - clase1 - clase2 - clase3- clase4 - clase5 - clase6 - clase7- clase8 - clase10); 
+								clase9=(gca - clase1 - clase2 - clase3- clase4 - clase5 - clase6 - clase7- clase8 - clase10); 
 							}
 					
 					}	
@@ -131,12 +133,12 @@ public class Consumidor {
 			/**Enfoque de prioridades, Chávez-Juárez 2018*/
 		case 3 : 
 		if (gca>lbm) {
-			clase1 = lbm*0.5299 + (gca-lbm)*.3503; //Alimentos en el hogar
+			clase1 = integrantes*lbm*0.5299 + integrantes*(gca-lbm)*.3503; //Alimentos en el hogar
 			clase3 = lbm*0.2035 + (gca-lbm)*0.2035;  //hogar y vestido
-			clase6 = lbm*0.0515 + (gca-lbm)*0.0261; // seguridad
-			clase8 = lbm*0.0711 + (gca-lbm)*0.043; //transporte público. Consumo minimo vital
+			clase6 = lbm*0.02 + (gca-lbm)*0.0261; // seguridad
+			clase8 = lbm*0.0511 + (gca-lbm)*0.043; //transporte público. Consumo minimo vital
 				if(gca-clase1 - clase3 - clase6 - clase8 > 0) {
-					clase5 = (gca-clase1 - clase3 - clase6 - clase8)*0.2985; //consumo Salud (anterior .2585)
+					clase5 = (gca-clase1 - clase3 - clase6 - clase8)*0.2585; //consumo Salud (anterior .2585)
 					if (gca-clase1 - clase3 - clase6 - clase8 - clase5 > 0) {
 						clase4 = (gca-clase1 - clase3 - clase6 - clase8 - clase5)*0.1696; //consumo Educación
 						if(gca-clase1 - clase3 - clase6 - clase8 - clase5 -clase4 > 0) {  //consumo adicional
@@ -153,9 +155,9 @@ public class Consumidor {
 		}
 		else { clase1 = gca*0.5299;
 		clase3 = gca*0.2235;
-		clase6=gca*0.0249; 
-		clase8=gca*0.0511;
-		clase5 = (gca-clase1-clase3-clase6-clase8)*(0.4681);
+		clase6=gca*0.02; 
+		clase8=gca*0.045;
+		clase5 = (gca-clase1-clase3-clase6-clase8)*(0.58);
 		clase9 = (gca-clase1-clase3-clase6-clase8)*(0.1053);
 		clase2 = (gca-clase1-clase3-clase6-clase8)*0.1111;
 		clase4 = (gca-clase1-clase3-clase6-clase8)*0.14;
@@ -194,6 +196,7 @@ public class Consumidor {
 		}
 		
 	}
+	
 	 
 	 //metodo promedio vecinos
 	 @ScheduledMethod(start=1,interval=1,shuffle=true,priority=89)

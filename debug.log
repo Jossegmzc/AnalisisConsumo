@@ -90,3 +90,10 @@ Caused by: java.lang.ClassNotFoundException: analisisConsumo.ConsumoBuilder
 	at repast.simphony.dataLoader.engine.ClassNameDataLoaderAction.<init>(ClassNameDataLoaderAction.java:23)
 	at repast.simphony.dataLoader.engine.CNDataLoaderActionLoader.performLoad(CNDataLoaderActionLoader.java:35)
 	... 26 more
+WARN  [Thread-5] 2019-03-28 14:50:51,714 repast.simphony.ui.GUIScheduleRunner - Caught InterruptedException when running simulation, unpausing.
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Object.wait(Unknown Source)
+	at repast.simphony.ui.GUIScheduleRunner.go(GUIScheduleRunner.java:137)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:48)
+	at java.lang.Thread.run(Unknown Source)
