@@ -3,11 +3,15 @@ package analisisConsumo;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.parameter.Parameters;
+import repast.simphony.random.RandomHelper;
 
 public class Consumidor {
 	//double pphog; //integrantes en el hogar.
 	double gca; //cantidad total designada al consumo
-	int pos; //percentil en la distribución del gasto total anual de consumo.
+	/**percentil en la distribución del gasto total anual de consumo.*/
+	int pos; 
+	/** Influenciabilidad*/
+	double inf;
 	/**consumo de Alimentos en el hogar*/
 	double clase1; 
 	/**Alimentos fuera del hogar*/
@@ -28,15 +32,23 @@ public class Consumidor {
 	double clase9; //
 	/**Comunicación, tecnología, juguetes y artículos de entretenimiento*/
 	double clase10; //
-
+	
+	int integrantes;
+	
+	int menores ;
+	int persona7a59;
+	int mayor60;
+	int enfermo;
 	
 	
 	
-	public Consumidor( int pos, double gca ) {
+	
+	public Consumidor( int pos, double gca, int integrantes, int menores, int persona7a59, int mayor60, int enfermo ) {
 		
 		//this.pphog = pphog;
 		this.gca = gca;
 		this.pos = pos;
+		this.inf = RandomHelper.createUniform(0, 1).nextDouble();
 		this.clase1 = 0;
 		this.clase2 = 0;
 		this.clase3 = 0;
@@ -47,6 +59,14 @@ public class Consumidor {
 		this.clase8 = 0;
 		this.clase9 = 0;
 		this.clase10 = 0;
+		this.integrantes = 1;
+		this.menores = 0;
+		this.persona7a59 = 0;
+		this.mayor60 = 0;
+		this.enfermo= 0;
+		
+		
+		
 		
 		
 		
@@ -55,9 +75,14 @@ public class Consumidor {
 	 Parameters params = RunEnvironment.getInstance().getParameters();
 	int enfoque = params.getInteger("enfoque");//esto será un parámetro o una variable contadora que haga que se optimice según todos los enfoques
 	double lbm = params.getDouble("bienmin");
+	int rango = params.getInteger("rango");
+	int nivelSimulacion = params.getInteger("nivel"); //1 para percapita, 2 para nivel hogar
+	
 	//double lbm = 5000; 
 	//methods
 
+		
+	
 	/**Método mediante los consumidores deciden su proporción de consumo*/
 	 @ScheduledMethod(start=1,interval=1,shuffle=true,priority=90)
 	public void consumo() {
@@ -80,19 +105,19 @@ public class Consumidor {
 		case 2 : if (gca > lbm){
 			
 		
-			clase1 = lbm + (gca-lbm)*0.2124; 
+			clase1 = integrantes*gca*(1-(gca-lbm)/gca) + gca*0.18; 
 			if(gca-clase1 > 0) { 
-				clase3= (gca-clase1)*0.3389;
-				clase5 = (gca-clase1)*0.1408;
-				clase6 = (gca-clase1)*0.0438;
-				clase8 = (gca-clase1)*0.0713; 
+				clase3= integrantes*(gca-clase1)*0.3389;
+				clase5 = integrantes*(gca-clase1)*0.1408;
+				clase6 = integrantes*(gca-clase1)*0.0438;
+				clase8 = integrantes*(gca-clase1)*0.0713; 
 					if(gca-clase1-clase3-clase5-clase6-clase8 > 0) {
-						clase2 =(gca-clase1-clase3-clase5-clase6-clase8)*0.1215; 
-						clase10 = (gca-clase1-clase3-clase5-clase6-clase8)*0.0903;
+						clase2 =integrantes*(gca-clase1-clase3-clase5-clase6-clase8)*0.1215; 
+						clase10 = integrantes*(gca-clase1-clase3-clase5-clase6-clase8)*0.0903;
 							if (gca - clase1 - clase3 - clase5- clase2-clase6-clase8-clase10 > 0 ){ 
-								clase4 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.2557; 
-								clase7 = (gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.5148; 
-								clase9=(gca - clase1 - clase2 - clase3- clase4 - clase5 - clase6 - clase7- clase8 - clase10); 
+								clase4 = integrantes*(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.2557; 
+								clase7 = integrantes*(gca - clase1 - clase3 - clase5- clase2 - clase6 - clase8 - clase10)*0.5148; 
+								clase9=integrantes*(gca - clase1 - clase2 - clase3- clase4 - clase5 - clase6 - clase7- clase8 - clase10); 
 							}
 					
 					}	
@@ -148,8 +173,7 @@ public class Consumidor {
 			clase3 = gca*0.66*0.2035 + gca*0.1423*0.2035; 
 			clase4 = gca*0.0344*0.5 + gca*pos*0.000008347*0.0344; 
 			clase5 = gca*0.0847*0.61+ gca*0.0847*0.0385; 
-			clase6 = gca*0.0261*(0.63); 
-			
+			clase6 = gca*0.0261*(0.63); 			
 			clase8 = gca*0.043*(0.69 + 0.0346); 
 			clase9 = gca*0.031*(0.68+0.70);
 			clase10 = gca*0.038 + gca*pos*0.000008347*0.0581 ;
@@ -170,6 +194,15 @@ public class Consumidor {
 		}
 		
 	}
+	 
+	 //metodo promedio vecinos
+	 @ScheduledMethod(start=1,interval=1,shuffle=true,priority=89)
+	 public void promedioVecinos () {
+		 
+	 }
+	 
+	 
+	 
 	
 	 public int countConsumidor() { 
          return 1; 
