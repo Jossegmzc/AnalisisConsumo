@@ -18,6 +18,8 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
         
       //  String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/basepercapitatotal.csv";// per capita
         String fileNameDefined = "C:/Users/Jose Gmz/Desktop/BASES/Biare/baseHogInteg.csv"; //nivel hogar
+        fileNameDefined = "C:/Users/Florian/Desktop/baseHogInteg.csv"; //nivel hogar
+
         // -File class needed to turn stringName to actual file
         File file = new File(fileNameDefined);
 
@@ -26,7 +28,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
             Scanner scanner = new Scanner(file);
             
             //scanner.useDelimiter(",");
-    		//scanner.nextLine();
+    		scanner.nextLine();
             // hashNext() loops line-by-line
             while(scanner.hasNext()){
                 //read single line, put in string

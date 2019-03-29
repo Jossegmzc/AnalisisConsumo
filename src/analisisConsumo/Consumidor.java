@@ -1,9 +1,15 @@
 package analisisConsumo;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
+import cern.colt.Arrays;
+import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.parameter.Parameters;
 import repast.simphony.random.RandomHelper;
+import repast.simphony.util.ContextUtils;
 
 public class Consumidor {
 	//double pphog; //integrantes en el hogar.
@@ -32,6 +38,9 @@ public class Consumidor {
 	double clase9; //
 	/**Comunicación, tecnología, juguetes y artículos de entretenimiento*/
 	double clase10; //
+	
+	
+	HashMap<Integer,Double> consumoPromedioVecinos = new HashMap<Integer,Double>();
 	
 	int integrantes;
 	
@@ -82,9 +91,49 @@ public class Consumidor {
 	//methods
 
 		
+	@ScheduledMethod(start=1,interval=1,shuffle=true,priority=95)
+	public void stepPromedioVecinos() {
+		
+		//FIXME: you might want to add an if-clause here to limit the execution of this script to 'enfoques' where it is actually required
+		// Define range of pos
+		int maxPos = this.pos + 10; //FIXME: en lugar de poner 10, sería bueno ligar eso a un parámetro. Pueden ser 2, uno para arriba y otro para abajo
+		int minPos = this.pos - 10;
+		//System.out.printf("Individual %s is computing the average of others\n",this.pos);
+		
+		double[] sum = new double[11];
+		int n = 0;
+		
+		Context<?> myContext = ContextUtils.getContext(this);
+		for(Object candidate : myContext.getObjects(Consumidor.class)) {
+			Consumidor c = (Consumidor)candidate;
+			
+			if(c.pos>=minPos && c.pos<=maxPos && c!=this) {
+				n++;
+				sum[1] += c.clase1;
+				sum[2] += c.clase2;
+				sum[3] += c.clase3;
+				sum[4] += c.clase4;
+				sum[5] += c.clase5;
+				sum[6] += c.clase6;
+				sum[7] += c.clase7;
+				sum[8] += c.clase8;
+				sum[9] += c.clase9;
+				sum[10] += c.clase10;
+				//System.out.printf("After pos %s: %s\n",c.pos,Arrays.toString(sum));
+			}
+		} //end of loop over all candidates
+		
+		// Compute the average and store it directly in the local variable
+		for(int i=1;i<=10;i++){
+			this.consumoPromedioVecinos.put(i,sum[i]/n);
+			//System.out.printf("%s,",sum[i]/n);
+		}
+		//System.out.println("End of method"); 
+		
+	}
 	
 	/**Método mediante los consumidores deciden su proporción de consumo*/
-	 @ScheduledMethod(start=1,interval=1,shuffle=true,priority=90)
+	@ScheduledMethod(start=1,interval=1,shuffle=true,priority=90)
 	public void consumo() {
 	switch (enfoque) {
 	

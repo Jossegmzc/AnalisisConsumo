@@ -38,7 +38,7 @@ public class ConsumoBuilder_fwchj implements ContextBuilder<Object> {
             	 //FIXME: aqui habria que agregar un dato mas y tener una variable mas en el builder
             	// System.out.printf("%s, %s \n", pos, gca);
             	           
-            	  context.add(new Consumidor(pos,gca));
+            	  //context.add(new Consumidor(pos,gca));
             	 //System.out.println(pos);
             	 //System.out.println(gca);
             	     	 
