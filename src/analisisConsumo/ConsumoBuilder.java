@@ -68,6 +68,7 @@ public class ConsumoBuilder implements ContextBuilder<Object> {
     
     
     System.out.printf("Finished context of size %s\n", context.size());
+    RunEnvironment.getInstance().endAt(10);//ends at tick 10
             
     return context;  
 }

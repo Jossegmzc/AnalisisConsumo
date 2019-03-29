@@ -91,14 +91,14 @@ public class Consumidor {
 	//methods
 
 		
-	@ScheduledMethod(start=1,interval=1,shuffle=true,priority=95)
+	@ScheduledMethod(start=2,interval=1,shuffle=true,priority=95)
 	public void stepPromedioVecinos() {
 		
 		//FIXME: you might want to add an if-clause here to limit the execution of this script to 'enfoques' where it is actually required
 		// Define range of pos
 		int maxPos = this.pos + rango; //FIXME: en lugar de poner 10, sería bueno ligar eso a un parámetro. Pueden ser 2, uno para arriba y otro para abajo
 		int minPos = this.pos - rango;
-		System.out.printf("Individual %s is computing the average of others\n",this.pos);
+		//System.out.printf("Individual %s is computing the average of others\n",this.pos);
 		
 		double[] sum = new double[11];
 		int n = 0;
@@ -218,7 +218,7 @@ public class Consumidor {
 		/**Valores de consumo, Sheth et al (1991)  */
 		case 4 :  
 			
-			if (gca > lbm && consumoPromedioVecinos.get(1)>0 ) { //valor funcional mas valor social
+			if (gca > lbm && RunEnvironment.getInstance().getCurrentSchedule().getTickCount()>=2 ) { //valor funcional mas valor social
 			clase1 = (1-inf)*(gca*0.5299 -pos*gca*.00000747*0.5299) + inf*consumoPromedioVecinos.get(1) ; 			
 			clase2 = (1-inf)*(gca*0.74*0.0792 + gca*pos*0.00001697*0.1192) + inf*consumoPromedioVecinos.get(2) ; 
 			clase3 = (1-inf)*(gca*0.66*0.2035 + gca*0.1423*0.2035)+ inf*consumoPromedioVecinos.get(3); 
@@ -230,7 +230,7 @@ public class Consumidor {
 			clase10 = (1-inf)*(gca*0.038 + gca*pos*0.000008347*0.0581) + inf*consumoPromedioVecinos.get(10);
 			clase7 = gca - clase10- clase2 - clase3 - clase4 - clase5 - clase6 - clase1 - clase8 - clase9 ; break;//
 			}
-			else if (gca > lbm && consumoPromedioVecinos.get(1)==0) {
+			else if (gca > lbm && RunEnvironment.getInstance().getCurrentSchedule().getTickCount() ==1 ) {
 				clase1 = (gca*0.5299 -pos*gca*.00000747*0.5299)  ; 			
 				clase2 = (gca*0.74*0.0792 + gca*pos*0.00001697*0.1192)  ; 
 				clase3 = (gca*0.66*0.2035 + gca*0.1423*0.2035) ; 

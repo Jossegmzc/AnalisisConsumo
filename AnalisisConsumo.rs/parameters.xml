@@ -19,7 +19,7 @@
 									
 		/>
 		<parameter name="rango" displayName="Rango" type="int" 
-						defaultValue="50" 
+						defaultValue="10" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
